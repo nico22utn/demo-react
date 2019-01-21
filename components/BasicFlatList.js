@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text,FlatList, StyleSheet,Image, Alert } from 'react-native';
+import { View, Text,FlatList, StyleSheet,Image, Alert,TouchableHighlight } from 'react-native';
 import data from './FlatListData';
 import Swipeout from 'react-native-swipeout';
+import {AddItem} from './AddItem';
 
 class FlatListItem extends Component {
     constructor(props){
@@ -53,15 +54,11 @@ class FlatListItem extends Component {
                     flexDirection:  "row",
                     backgroundColor: this.props.index % 2 == 0 ? 'blue' : 'green'
                 }}>
-                    <Image
-                        source = {{uri: this.props.item.imageUrl}}
-                        style = {{width: 100, height: 100, margin: 5}}
-                    >
-                    </Image>
                     <View style = {{
                         flex: 1,
                         flexDirection: 'column'
                     }}>
+                        <Image style = {{width: 35, height: 35}} source = {{uri: "https://www.365imagenesbonitas.com/wp-content/uploads/2017/12/lulworth-inglaterra.jpg"}}/>
                         <Text style = { styles.flatListItemStyle}>{this.props.item.name}</Text>
                         <Text style = { styles.flatListItemStyle}>{this.props.item.foodDescription}</Text>
                     </View>
@@ -78,32 +75,45 @@ class FlatListItem extends Component {
 } 
 
 export default class BasicFlatList extends Component {
-    constructor(props) {
+    constructor(props){
         super(props);
-        this.state = {
-        };
+        this.state = ({
+            deletedRowKey: null
+        })
+        this._onPressAdd = this._onPressAdd.bind(this);
     }
     refreshFlatList = (deletedKey) => {
         this.setState(prevState => {
             return { activeRowKey: deletedKey };
         });
     }
-  render() {
-    return (
-      <View style = {{
-          flex: 1,
-          marginTop: 22
-      }}>
-        <FlatList data = {data} renderItem = { ({item,index})=>{
-            return(
-                <FlatListItem item = {item} index={index} parentFlatList = {this}></FlatListItem>
-            );
+    _onPressAdd (){
+        this.refs.addItem.showAddModal();
+    }
+    render() {
+        return (
+        <View style = {{
+            flex: 1,
+            marginTop: 22
         }}>
+            <View style = {{ backgroundColor: 'tomato', height: 64, justifyContent: 'flex-end', flexDirection: 'row'}}>
+                <TouchableHighlight style = {{
+                    marginRight: 10}} underlayColor= 'tomato' onPress= {this._onPressAdd}>
+                    <Image style = {{width: 35, height: 35}} source = {{uri: "https://www.365imagenesbonitas.com/wp-content/uploads/2017/12/playa-maldivas.jpg"}}/>
+                </TouchableHighlight>
+            </View>
+            <FlatList data = {data} renderItem = { ({item,index})=>{
+                return(
+                    <FlatListItem item = {item} index={index} parentFlatList = {this}></FlatListItem>
+                );
+            }}>
+            </FlatList>
+            <AddItem ref = {'addItem'} parentFlatList={this}>
 
-        </FlatList>
-      </View>
-    );
-  }
+            </AddItem>
+        </View>
+        );
+    }
 }
 
 const styles = StyleSheet.create({
