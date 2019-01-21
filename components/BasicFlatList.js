@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text,FlatList, StyleSheet } from 'react-native';
+import { View, Text,FlatList, StyleSheet,Image } from 'react-native';
 import data from './FlatListData';
 
 class FlatListItem extends Component {
@@ -7,10 +7,26 @@ class FlatListItem extends Component {
         return(
             <View style = {{
                 flex: 1,
-                backgroundColor: this.props.index % 2 == 0 ? 'blue' : 'tomato'
+                flexDirection: 'column',
             }}>
-                <Text style = { styles.flatListItemStyle}>{this.props.item.name}</Text>
-                <Text style = { styles.flatListItemStyle}>{this.props.item.foodDescription}</Text>
+                <View style = {{
+                    flex: 1,
+                    flexDirection:  "row",
+                    backgroundColor: this.props.index % 2 == 0 ? 'blue' : 'green'
+                }}>
+                    <Image
+                        source = {{uri: this.props.item.imageUrl}}
+                        style = {{width: 100, height: 100, margin: 5}}
+                    >
+                    </Image>
+                    <View style = {{
+                        flex: 1,
+                        flexDirection: 'column'
+                    }}>
+                        <Text style = { styles.flatListItemStyle}>{this.props.item.name}</Text>
+                        <Text style = { styles.flatListItemStyle}>{this.props.item.foodDescription}</Text>
+                    </View>
+                </View>
             </View>
         );
     }
