@@ -10,9 +10,7 @@ export default class App extends Component {
     let screenWidth = Dimensions.get('window').width;
     let screenHeight = Dimensions.get('window').height;
     return (
-        <View>
             <BasicFlatList/>
-        </View>
         );
     }
 }
