@@ -26,8 +26,11 @@ export default class AddItem extends Component {
         onClosed= {()=>{
             alert("Modal cerrado")
         }}>
-        <TextInput style = {styles.inputStyle} placeholder = "Ingrese nueva comida" value= {this.state.newFoodName}/>
-        <TextInput style = {styles.inputStyle} placeholder = "Ingrese descripción" value= {this.state.newFoodDescription}/>
+        <Text style = {styles.textStyle}>Nueva Comida</Text>
+        <TextInput style = {styles.inputStyle} placeholder = "Ingrese nueva comida" value= {this.state.newFoodName}
+            onChangeText = { (text) => this.setState({ newFoodName: text})}/>
+        <TextInput style = {styles.inputStyle} placeholder = "Ingrese descripción" value= {this.state.newFoodDescription}
+            onChangeText = { (text) => this.setState({ newFoodDescription: text})}/>
 
       </Modal>
     );
@@ -35,6 +38,13 @@ export default class AddItem extends Component {
 }
 
 const styles = StyleSheet.create({
+    textStyle:{
+        fontSize: 16,
+        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 40,
+        color: 'black'
+    },
     inputStyle: {
         height: 40,
         borderBottomColor: 'gray',
