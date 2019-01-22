@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text,FlatList, StyleSheet,Image, Alert,TouchableHighlight } from 'react-native';
 import data from './FlatListData';
 import Swipeout from 'react-native-swipeout';
-import {AddItem} from './AddItem';
+import AddItem from './AddItem';
 
 class FlatListItem extends Component {
     constructor(props){
