@@ -86,6 +86,7 @@ export default class BasicFlatList extends Component {
         this.setState(prevState => {
             return { activeRowKey: deletedKey };
         });
+        this.refs.myFlatList.scrollToEnd();
     }
     _onPressAdd (){
         this.refs.addItem.showAddModal();
@@ -102,7 +103,7 @@ export default class BasicFlatList extends Component {
                     <Image style = {{width: 35, height: 35}} source = {{uri: "https://www.365imagenesbonitas.com/wp-content/uploads/2017/12/playa-maldivas.jpg"}}/>
                 </TouchableHighlight>
             </View>
-            <FlatList data = {data} renderItem = { ({item,index})=>{
+            <FlatList ref = {"myFlatList"} data = {data} renderItem = { ({item,index})=>{
                 return(
                     <FlatListItem item = {item} index={index} parentFlatList = {this}></FlatListItem>
                 );
