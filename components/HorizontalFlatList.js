@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, Alert, StyleSheet, Image,FlatList } from 'react-native';
+import { View, Text, Alert, TouchableOpacity, StyleSheet, Image,FlatList } from 'react-native';
 import {dataFlat,horizontalStatus} from './HorizontalFlatData';
 import Icon from 'react-native-vector-icons/Ionicons';
 
@@ -7,11 +7,15 @@ class HorizontalFlatListItem extends Component{
     render(){
         return(
             <View style = {styles.horizontalItemStyle}>
-                <View styles= {styles.singleViewStyle}>
+                <TouchableOpacity
+                    onPress = { () => {
+                        alert(`You pressed ${this.props.item.hour}`)
+                    }}
+                    style = {styles.touchableStyle}>
+                </TouchableOpacity>
                 <Text style = { styles.textStyle }>{this.props.item.hour}</Text>
                 <Icon name = {this.props.item.status.android} size= {30} color= 'white'/>
                 <Text style = { styles.degreesStyle}>{this.props.item.degrees} °F</Text>
-                </View>
             </View>
         );
     }
@@ -40,6 +44,7 @@ export default class HorizontalFlatList extends Component {
             }}>
                 Weather Forecast
             </Text>
+            <View style = {styles.singleViewStyle}>
             <FlatList style = {styles.flatStyle} 
                 horizontal = {true} data = {dataFlat} renderItem = {({item,index})=>{
                     return(
@@ -49,6 +54,7 @@ export default class HorizontalFlatList extends Component {
                 }}
                 keyExtractor = {(item,index) => item.hour}>
             </FlatList>
+            </View>
       </View>
     );
   }
@@ -103,6 +109,13 @@ const styles = StyleSheet.create(
             fontSize: 16,
             margin: 10,
             color: 'white'
+        },
+        touchableStyle:{
+            position: 'absolute',
+            top: 0,
+            bottom: 0,
+            left: 0,
+            right: 0
         }   
     }
 );
